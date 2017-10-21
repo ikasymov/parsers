@@ -1,0 +1,15 @@
+{
+  "name": "parsers",
+  "version": "1.0.0",
+  "description": "Parser",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sequelize": "^4.15.0",
+    "sequelize-cli": "^3.0.0"
+  }
+}
