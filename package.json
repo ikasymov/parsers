@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mysql2": "^1.4.2",
     "sequelize": "^4.15.0",
-    "sequelize-cli": "^3.0.0"
+    "sequelize-cli": "^3.0.0",
+    "x-ray": "^2.3.2"
   }
 }

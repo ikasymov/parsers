@@ -8,16 +8,16 @@ module.exports = function(sequelize, DataTypes) {
     resource_id:{
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
   }, {
     classMethods: {
     },
-    timestamps: false,
+    timestamps: true,
     underscored: true,
     underscoredAll: true
   });
   SentStack.associate = function(models){
-    this.BelongsTo(models.Resource, {foreignKey: 'resource_id'})
+    this.belongsTo(models.Resource, {foreignKey: 'resource_id'})
   };
   return SentStack;
 };
