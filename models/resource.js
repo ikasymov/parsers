@@ -1,6 +1,7 @@
 'use strict';
 var Xray = require('x-ray');
 var x = Xray();
+let check = require('url')
 module.exports = function(sequelize, DataTypes) {
   var Resource = sequelize.define('Resource', {
     url: {
@@ -46,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
     let url = await this.getActualUrls();
     url = url.filter(object=>{
       if(object != undefined || object != null){
-        let result = url.parse(object)
+        let result = check.parse(object)
         if(result.host){
           return object
         }
