@@ -4,13 +4,13 @@ let async  = require('async');
 
 async function start(){
   let resource = await db.Resource.findAll({
-    where:{
-      active: true
-    }
+  where:{
+    active: true
+  }
   });
   return new Promise((resolve, reject)=>{
     async.map(resource, (obj, next)=>{
-      obj.updateTopicalStack().then(result=>{
+      obj.clean().then(result=>{
         // console.log(result)
         next(null, result)
       })

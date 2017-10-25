@@ -162,6 +162,54 @@ module.exports = {
         path_2: 'ul li h2 a@href',
         group_id: 1193,
         active: true
+      },
+      {
+        id: 22,
+        url: 'https://www.akchabar.kg/news/',
+        path_1: '.col-md-6.content_news_list',
+        path_2: '.news_list_wrapper a@href',
+        group_id: 1168,
+        active: true
+      },
+      {
+        id: 23,
+        url: 'https://www.edimdoma.ru/retsepty',
+        path_1: '.grid-two-column__column.grid-two-column__column_center.tags_content_pages_container',
+        path_2: '.card-container .card .card__content .card__description  a@href',
+        group_id: 1165,
+        active: true
+      },
+      {
+        id: 24,
+        url: 'http://www.forbes.ru/news',
+        path_1: '.panel-pane.pane-page-content',
+        path_2: '.block-href-material.block-href-material-0.active .item-material .href-material@href',
+        group_id: 1158,
+        active: true
+      },
+      {
+        id: 25,
+        url: 'https://www.kp.kg/',
+        path_1: 'None',
+        path_2: 'None',
+        group_id: 1145,
+        active: true
+      },
+      {
+        id: 26,
+        url: 'http://www.rbc.ru/',
+        path_1: '.custom-scroll__inner.js-scrollable-content',
+        path_2: '.news-feed__list a@href',
+        group_id: 1152,
+        active: true
+      },
+      {
+        id: 27,
+        url: 'http://www.the-village.ru/',
+        path_1: '.posts-layout.posts-layout-with-news',
+        path_2: '.lastnews-block .post-item.post-item-news a@href',
+        group_id: 1156,
+        active: true
       }
     ];
     return queryInterface.bulkInsert('resources', resources);
