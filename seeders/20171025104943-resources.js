@@ -20,7 +20,7 @@ module.exports = {
         active: true
       },
       {
-        id: 4,
+        id: 5,
         url: 'https://www.azattyk.org/z/828',
         path_1: '#ordinaryItems',
         path_2: 'li .content a@href',
@@ -28,7 +28,7 @@ module.exports = {
         active: true
       },
       {
-        id: 5,
+        id: 4,
         url: 'http://www.elle.ru/allarticles/',
         path_1: '.place-js',
         path_2: '.c1.drm a.newsItem__imgBlock@href',
@@ -68,7 +68,7 @@ module.exports = {
         active: true
       },
       {
-        id: 10,
+        id: 11,
         url: 'http://kaktus.media/?lable=8',
         path_1: '.block_content .cat_content ul',
         path_2: 'li .t a@href',
@@ -76,7 +76,7 @@ module.exports = {
         active: true
       },
       {
-        id: 11,
+        id: 10,
         url: 'https://kloop.kg/news/',
         path_1: '.wpb_wrapper',
         path_2: '.td_block_wrap .td_block_inner .td-module-thumb a@href',
