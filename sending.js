@@ -6,6 +6,9 @@ let request = require('request')
 
 async function getAllResources(){
   return db.Resource.findAll({
+    where:{
+      active: true
+    },
     include: [{
       model: db.TopicalStack
     }]

@@ -8,7 +8,7 @@ module.exports = {
         url: 'http://www.eurosport.ru/',
         path_1: '.storylist-latest-content',
         path_2: '.storylist-latest__picture a@href',
-        group_id: 1679,
+        group_id: 1194,
         active: true
       },
       {
