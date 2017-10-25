@@ -4,7 +4,8 @@ var url = require("url");
 let data = {
   url: process.env.URL,
   path_1: process.env.PATH_1,
-  path_2: process.env.PATH_2
+  path_2: process.env.PATH_2,
+  group_id: process.env.GROUP
 };
 db.Resource.findOne({
   where:{
@@ -33,6 +34,7 @@ db.Resource.findOne({
         result.destroy();
         return false
       }
+      result.update({active: true});
       console.log(true);
       return true
     })

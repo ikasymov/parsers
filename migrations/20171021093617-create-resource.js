@@ -19,6 +19,14 @@ module.exports = {
       path_2: {
         type: Sequelize.TEXT,
         allowNull: true
+      },
+      group_id:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     });
   },

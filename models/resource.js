@@ -14,6 +14,14 @@ module.exports = function(sequelize, DataTypes) {
     path_2: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    group_id:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     classMethods: {
@@ -36,6 +44,14 @@ module.exports = function(sequelize, DataTypes) {
   
   Resource.prototype.updateTopicalStack = async function(){
     let url = await this.getActualUrls();
+    url = url.filter(object=>{
+      if(object != undefined || object != null){
+        let result = url.parse(object)
+        if(result.host){
+          return object
+        }
+      }
+    });
     let actual = await sequelize.models.TopicalStack.findOrCreate({
       where:{
         resource_id: this.id
@@ -59,11 +75,12 @@ module.exports = function(sequelize, DataTypes) {
     let diffActual = url.filter(x => sentList.indexOf(x) == -1);
     let result = diffActual.filter(x => actualList.indexOf(x) == -1);
     if(result.length <= 0){
-      console.log('not diff')
-      return true
+      console.log('not diff');
+      return 'not diff'
     }
-    actualList.push.apply(actualList, result)
-    return await actual.update({urls: JSON.stringify(actualList)})
+    result.push.apply(result, actualList);
+    await actual.update({urls: JSON.stringify(result)})
+    return 'update'
   };
   return Resource;
 };
