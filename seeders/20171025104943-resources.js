@@ -210,6 +210,38 @@ module.exports = {
         path_2: '.lastnews-block .post-item.post-item-news a@href',
         group_id: 1156,
         active: true
+      },
+      {
+        id: 28,
+        url: 'https://vc.ru/',
+        path_1: '.feed__container',
+        path_2: '.feed__item a.entry_content__link@href',
+        group_id: 1163,
+        active: true
+      },
+      {
+        id: 29,
+        url: 'https://lady.mail.ru/stars/',
+        path_1: '.cols__wrapper',
+        path_2: '.cell a.newsitem__title.link-holder@href',
+        group_id: 1162,
+        active: true
+      },
+      {
+        id: 30,
+        url: 'https://hightech.fm/api/internal/archive',
+        path_1: 'None',
+        path_2: 'None',
+        group_id: 1161,
+        active: true
+      },
+      {
+        id: 31,
+        url: 'https://ria.ru/lenta/',
+        path_1: '.b-lists-wr .b-list-normal',
+        path_2: '.b-list__item  a@href',
+        group_id: 1164,
+        active: true
       }
     ];
     return queryInterface.bulkInsert('resources', resources);
