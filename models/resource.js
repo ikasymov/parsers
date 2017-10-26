@@ -41,27 +41,17 @@ module.exports = function(sequelize, DataTypes) {
   };
   Resource.prototype.getActualUrls = async function(){
     if(this.url === 'https://www.kp.kg/'){
-      let data = {
-        url: this.url,
-        method: 'GET'
-      };
-      return new Promise((resolve, reject)=>{
-        request(data, (error, req, body)=>{
-          let doc = new dom().parseFromString(body);
-          let leftsiteBar = xpath.select('//*[@id="newsRegionJS"]', doc).toString();
-          let $ = sh.load(leftsiteBar);
-          resolve($('div').children('article').map(function(i, elem){
-            return ['http://www.kp.kg/online/news/' + $(this).attr('data-news-id') + '/'];
-          }).get());
-        });
-      });
+      return await kpParser(this)
+    }else if(this.url === 'https://hightech.fm/api/internal/archive') {
+      return await hightech(this);
     }
     return new Promise((resolve, reject)=>{
       x(this.url, this.path_1, [this.path_2])((error, list)=>{
         if(error){
           reject(error)
         }
-        resolve(list)
+        let uniqueItems = Array.from(new Set(list));
+        resolve(uniqueItems)
       })
     });
   };
@@ -112,6 +102,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   };
   
+  
   Resource.prototype.clean = async function(){
     let topicStack = await sequelize.models.TopicalStack.findOne({
       where:{
@@ -131,4 +122,68 @@ module.exports = function(sequelize, DataTypes) {
     return 'ok'
   }
   return Resource;
+};
+
+
+async function kpParser(self){
+  let data = {
+    url: self.url,
+    method: 'GET'
+  };
+  return new Promise((resolve, reject)=>{
+    request(data, (error, req, body)=>{
+      let doc = new dom().parseFromString(body);
+      let leftsiteBar = xpath.select('//*[@id="newsRegionJS"]', doc).toString();
+      let $ = sh.load(leftsiteBar);
+      resolve($('div').children('article').map(function(i, elem){
+        return ['http://www.kp.kg/online/news/' + $(this).attr('data-news-id') + '/'];
+      }).get());
+    });
+  });
+}
+
+async function hightech(self){
+  let data = {
+    url: self.url + '?month=&date=' + getDateTime(),
+    method: 'GET'
+  };
+  return new Promise((resolve, reject)=>{
+    request(data, (error, req, body)=>{
+      let reqBody = JSON.parse(body)
+      let articles = reqBody.data.days[0].articles;
+      let urls = articles.map(current=>{
+        return 'https://hightech.fm' + current.url
+      });
+      let uniqueItems = Array.from(new Set(urls));
+      resolve(uniqueItems)
+    })
+  });
+}
+
+
+
+function getDateTime() {
+  
+  let date = new Date();
+  
+  let hour = date.getHours();
+  hour = (hour < 10 ? "0" : "") + hour;
+  
+  let min  = date.getMinutes();
+  min = (min < 10 ? "0" : "") + min;
+  
+  let sec  = date.getSeconds();
+  sec = (sec < 10 ? "0" : "") + sec;
+  
+  let year = date.getFullYear();
+  
+  let month = date.getMonth() + 1;
+  month = (month < 10 ? "0" : "") + month;
+  
+  let day  = date.getDate();
+  day = parseInt(day) + 1;
+  day = (day < 10 ? "0" : "") + day;
+  let dash = '-';
+  return year + dash + month + dash + day
+  
 };
