@@ -242,6 +242,54 @@ module.exports = {
         path_2: '.b-list__item  a@href',
         group_id: 1164,
         active: true
+      },
+      {
+        id: 32,
+        url: 'https://lostfilm.info/news/',
+        path_1: '.grid_9 #movie-header',
+        path_2: '.news-container a.submenu-btn-nodrop.relative@href',
+        group_id: 770,
+        active: true
+      },
+      {
+        id: 33,
+        url: 'https://www.zakon.kz/news/',
+        path_1: '.border-content #dle-content',
+        path_2: 'a@href',
+        group_id: 1260,
+        active: true
+      },
+      {
+        id: 34,
+        url: 'https://data.nur.kz/posts?search[top_status]=1,2&search[section_id]=1&search[language]=ru&per-page=30&search[status]=3&sort=-published_at&thumbnail=r305x185&_format=json&fields=id,slug,catchy_title,description,published_at,thumb,comment_count,section_id&page=1',
+        path_1: 'None',
+        path_2: 'None',
+        group_id: 1261,
+        active: true
+      },
+      {
+        id: 35,
+        url: 'https://tengrinews.kz/',
+        path_1: '#lenta_block',
+        path_2: '.ten a@href',
+        group_id: 1262,
+        active: true
+      },
+      {
+        id: 36,
+        url: 'https://www.sports.kz/',
+        path_1: '.news-list.hotmobile .scroll-hot-news',
+        path_2: 'ul li a@href',
+        group_id: 1264,
+        active: true
+      },
+      {
+        id: 37,
+        url: 'https://365info.kz/category/poslednie-novosti/',
+        path_1: '.row.category__items',
+        path_2: '.item a.item__link@href',
+        group_id: 1263,
+        active: true
       }
     ];
     return queryInterface.bulkInsert('resources', resources);
