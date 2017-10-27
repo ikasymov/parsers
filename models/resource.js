@@ -44,6 +44,10 @@ module.exports = function(sequelize, DataTypes) {
       return await kpParser(this)
     }else if(this.url === 'https://hightech.fm/api/internal/archive') {
       return await hightech(this);
+    }else if(this.url === 'https://data.nur.kz/posts?search[top_status]=1,2&search[section_id]=1&search[language]=ru&per-page=30&search[status]=3&sort=-published_at&thumbnail=r305x185&_format=json&fields=id,slug,catchy_title,description,published_at,thumb,comment_count,section_id&page=1'){
+      return await nurKz(this);
+    }else if(this.url === 'https://www.sports.kz/'){
+      return await sportsKz(this);
     }
     return new Promise((resolve, reject)=>{
       x(this.url, this.path_1, [this.path_2])((error, list)=>{
@@ -59,7 +63,9 @@ module.exports = function(sequelize, DataTypes) {
   Resource.prototype.updateTopicalStack = async function(){
     try{
       let url = await this.getActualUrls();
-  
+      if(url.length <= 0){
+        return 'not found list'
+      }
     url = url.filter(object=>{
       if(object != undefined || object != null){
         let result = check.parse(object)
@@ -155,6 +161,46 @@ async function hightech(self){
         return 'https://hightech.fm' + current.url
       });
       let uniqueItems = Array.from(new Set(urls));
+      resolve(uniqueItems)
+    })
+  });
+}
+
+async function nurKz(self){
+  let data = {
+    url: self.url,
+    method: 'GET'
+  };
+  return new Promise((resolve, reject)=>{
+    request(data, (error, req, body)=>{
+      if(error || req.statusCode === 403){
+        resolve([])
+      }
+      let reqBody = JSON.parse(body);
+      let list = reqBody.map((current)=>{
+        return 'https://www.nur.kz/' + current.id + '-' + current.slug + '.html'
+      });
+      let uniqueItems = Array.from(new Set(list))
+      resolve(uniqueItems)
+    })
+  });
+}
+
+async function sportsKz(self){
+  return new Promise((resolve, reject)=>{
+    x(self.url, self.path_1, [self.path_2])((error, result)=>{
+      let count = 0;
+      if(result.length <= 0){
+        resolve(result)
+      }
+      let list = result.filter(current=>{
+        if((count % 2) === 0){
+          count ++;
+          return current
+        }
+        count ++;
+      });
+      let uniqueItems = Array.from(new Set(list));
       resolve(uniqueItems)
     })
   });
