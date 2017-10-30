@@ -48,6 +48,8 @@ module.exports = function(sequelize, DataTypes) {
       return await nurKz(this);
     }else if(this.url === 'https://www.sports.kz/'){
       return await sportsKz(this);
+    }else if(this.url === 'https://vk.com/refoot' || this.url === 'https://vk.com/faceumma' || this.url === 'https://vk.com/in.humour'){
+      return await vk(this);
     }
     return new Promise((resolve, reject)=>{
       x(this.url, this.path_1, [this.path_2])((error, list)=>{
@@ -202,6 +204,17 @@ async function sportsKz(self){
       });
       let uniqueItems = Array.from(new Set(list));
       resolve(uniqueItems)
+    })
+  });
+}
+
+async function vk(self){
+  return new Promise((resolve, reject)=>{
+    x(self.url, '.wall_item', ['.wi_author a@data-post-id'])((error, list)=>{
+      let urls = list.map((current)=>{
+        return 'https://vk.com/wall' + current
+      });
+      resolve(urls)
     })
   });
 }

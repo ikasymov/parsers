@@ -290,6 +290,30 @@ module.exports = {
         path_2: '.item a.item__link@href',
         group_id: 1263,
         active: true
+      },
+      {
+        id: 38,
+        url: 'https://vk.com/in.humour',
+        path_1: '.wall_item',
+        path_2: '.wi_author a@data-post-id',
+        group_id: 98,
+        active: true
+      },
+      {
+        id: 39,
+        url: 'https://vk.com/refoot',
+        path_1: '.wall_item',
+        path_2: '.wi_author a@data-post-id',
+        group_id: 1268,
+        active: true
+      },
+      {
+        id: 40,
+        url: 'https://vk.com/faceumma',
+        path_1: '.wall_item',
+        path_2: '.wi_author a@data-post-id',
+        group_id: 1265,
+        active: true
       }
     ];
     return queryInterface.bulkInsert('resources', resources);
