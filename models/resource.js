@@ -103,10 +103,10 @@ module.exports = function(sequelize, DataTypes) {
       return 'not diff ' + this.url
     }
     result.push.apply(result, actualList);
-    await actual.update({urls: JSON.stringify(result)})
+    await actual.update({urls: JSON.stringify(result)});
     return 'update ' + this.url
     }catch(e){
-      return e
+      return e.message + '||' + this.url
     }
   };
   
